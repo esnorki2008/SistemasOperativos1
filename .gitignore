@@ -1,0 +1,8 @@
+
+*.cmd
+*.symvers
+*.order
+*.mod
+Proyecto1/Modulos/ModuloCpu.mod.c
+Proyecto1/Modulos/ModuloCpu.mod.o
+Proyecto1/Modulos/ModuloCpu.o
