@@ -6,3 +6,9 @@
 Proyecto1/Modulos/ModuloCpu.mod.c
 Proyecto1/Modulos/ModuloCpu.mod.o
 Proyecto1/Modulos/ModuloCpu.o
+*.o
+*.ko
+*.mk
+Proyecto1/Modulos/RAM/ModuloRam.mod.c
+Proyecto1/Modulos/CPU/ModuloCpu.mod.c
+Proyecto1/TCpu.c
