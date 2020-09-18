@@ -1,73 +1,50 @@
 #include <linux/module.h>
-#include <linux/init.h>
-#include <linux/kernel.h>
-#include <linux/proc_fs.h>
-#include <linux/sched.h>
-#include <linux/sched/signal.h>
-#include <linux/uaccess.h>
-#include <linux/fs.h>
-#include <linux/sysinfo.h>
-#include <linux/seq_file.h>
-#include <linux/slab.h>
+#include <linux/hugetlb.h>
 #include <linux/mm.h>
+#include <linux/kernel.h>
+#include <linux/init.h>
+#include <linux/quicklist.h>
+#include <linux/syscalls.h>
+#include <linux/fs.h>
+#include <linux/proc_fs.h>
+#include <linux/seq_file.h>
+#include <asm/uaccess.h>
+#include <linux/mman.h>
+#include <linux/mmzone.h>
 #include <linux/swap.h>
+#include <linux/swapfile.h>
+#include <linux/vmstat.h>
+#include <linux/atomic.h>
 #include <linux/timekeeping.h>
-
 //sudo mount -t fuse.vmhgfs-fuse .host:/Sis1 /c
+
+//  struct sysinfo {
+//               long uptime;             /* Seconds since boot */
+//               unsigned long loads[3];  /* 1, 5, and 15 minute load averages */
+//               unsigned long totalram;  /* Total usable main memory size */
+//               unsigned long freeram;   /* Available memory size */
+//               unsigned long sharedram; /* Amount of shared memory */
+//               unsigned long bufferram; /* Memory used by buffers */
+//               unsigned long totalswap; /* Total swap space size */
+//               unsigned long freeswap;  /* Swap space still available */
+//               unsigned short procs;    /* Number of current processes */
+//               char _f[22];             /* Pads structure to 64 bytes */
+//           };
+
+
+
 static int my_proc_show(struct seq_file *m, void *v){
-	int CantidadTotal;
-    struct task_struct *task;
-	struct task_struct *task_child; 
-	struct list_head *list;
-	int Carga;
-	int Espera;
-	int Carnet;
+	struct sysinfo dita;
 
-   
-	
-	Carga=0;
-	Espera=0;
-	for_each_process(task)
-    {
-        
-		if (task->state==0)
-			Carga++;
-		else if(task->state==1 || task->state==2)
-		{
-			Espera++;
-		}else if(task->state==3 || task->state==4)
-		{
-			Espera++;
-		}else{
-			Espera++;
-		}
-
-		
-
-        list_for_each(list,&task->children) {
-            task_child=list_entry(list,struct task_struct,sibling);
-			if (task_child->state==0)
-				Carga++;
-			else if(task_child->state==1 || task_child->state==2)
-			{
-				Espera++;
-			}else if(task_child->state==3 || task_child->state==4)
-			{
-				Espera++;
-			}else{
-				Espera++;
-			}
-    	}
-	}
-	
-	
-	CantidadTotal=Carga+Espera;
-	Carnet=201700886;
-	seq_printf(m," CantidadTotal: %d \n", CantidadTotal);	
-	seq_printf(m," Procesos Ejecutando/Ejecucion: %d \n", Carga);
-	seq_printf(m," Procesos Inactivos: %d \n", Espera);
-	seq_printf(m," Proyecto1-Sistemas1-AndhySolis-%d \n", Carnet);
-    return 0;
+	unsigned long Porcen;
+	unsigned long Ram_Usada;
+	unsigned long Decimal;
+	si_meminfo(&dita); 
+	Ram_Usada=(dita.totalram-dita.freeram)*100;
+	Porcen=Ram_Usada/ ((dita.totalram));
+	Decimal=(Ram_Usada*10000)/ ((dita.totalram))-Porcen*10000;
+	seq_printf(m,"%ld.%ld\n", Porcen,Decimal);
+	return 0;
 }
 
 static ssize_t my_proc_write(struct file* file, const char __user *buffer, size_t count, loff_t *f_pos){
@@ -89,7 +66,7 @@ static struct file_operations my_fops={
 
 static int __init test_init(void){
 	struct proc_dir_entry *entry;
-	entry = proc_create("mod_cpu", 0777, NULL, &my_fops);
+	entry = proc_create("mod_ram", 0777, NULL, &my_fops);
 	if(!entry) {
 		printk(KERN_INFO "Error Creando Archivo En PROC \n");
 		return -1;	
@@ -100,7 +77,7 @@ static int __init test_init(void){
 }
 
 static void __exit test_exit(void){
-	remove_proc_entry("mod_cpu",NULL);
+	remove_proc_entry("mod_ram",NULL);
 	printk(KERN_INFO "Desligar\n");
 }
 
@@ -110,4 +87,4 @@ module_init(test_init);
 module_exit(test_exit);
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Andhy");
-MODULE_DESCRIPTION("Modulo CPU");
+MODULE_DESCRIPTION("Modulo RAM");

@@ -19,10 +19,10 @@ static int my_proc_show(struct seq_file *m, void *v){
     struct task_struct *task;
 	struct task_struct *task_child; 
 	struct list_head *list;
-	int Carga;
-	int Espera;
-	int Carnet;
-
+	unsigned long Carga;
+	unsigned long Espera;
+	unsigned long Porcen;
+	unsigned long Decimal;
    
 	
 	Carga=0;
@@ -62,11 +62,15 @@ static int my_proc_show(struct seq_file *m, void *v){
 	
 	
 	CantidadTotal=Carga+Espera;
-	Carnet=201700886;
+	Carga=Carga*100;
+	Porcen=Carga/ ((CantidadTotal));
+	Decimal=(Carga*10000)/ ((CantidadTotal))-Porcen*10000;
+	seq_printf(m,"%ld.%ld\n", Porcen,Decimal);
+	/*
 	seq_printf(m," CantidadTotal: %d \n", CantidadTotal);	
 	seq_printf(m," Procesos Ejecutando/Ejecucion: %d \n", Carga);
 	seq_printf(m," Procesos Inactivos: %d \n", Espera);
-	seq_printf(m," Proyecto1-Sistemas1-AndhySolis-%d \n", Carnet);
+	*/
     return 0;
 }
 
