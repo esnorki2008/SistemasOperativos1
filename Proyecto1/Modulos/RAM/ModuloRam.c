@@ -43,7 +43,7 @@ static int my_proc_show(struct seq_file *m, void *v){
 	Ram_Usada=(dita.totalram-dita.freeram)*100;
 	Porcen=Ram_Usada/ ((dita.totalram));
 	Decimal=(Ram_Usada*10000)/ ((dita.totalram))-Porcen*10000;
-	seq_printf(m,"%ld.%ld\n", Porcen,Decimal);
+	seq_printf(m,"%ld.%ld", Porcen,Decimal);
 	return 0;
 }
 

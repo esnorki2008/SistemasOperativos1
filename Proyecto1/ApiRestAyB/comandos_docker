@@ -1,0 +1,16 @@
+docker images -a
+docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
+docker rmi ID
+docker run -p 5000:5000 -d api_ab
+docker image build -t api_ab .
+docker ps -a
+docker container ls
+docker container logs [container id]
+
+----------------------------MONGO--------------
+sudo mkdir -p /mongodata
+sudo docker run -it -v mongodata:/data/db --name mongodb -d mongo
+sudo docker run -it -p 27017:27017 --name mongodb -d mongo
+sudo docker exec -it mongodb bash
+---ENTRAR A MONGO
+mongo

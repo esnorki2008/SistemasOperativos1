@@ -39,7 +39,7 @@ static int my_proc_show(struct seq_file *m, void *v){
 		{
 			Espera++;
 		}else{
-			Espera++;
+			//Espera++;
 		}
 
 		
@@ -55,7 +55,7 @@ static int my_proc_show(struct seq_file *m, void *v){
 			{
 				Espera++;
 			}else{
-				Espera++;
+				//Espera++;
 			}
     	}
 	}
@@ -65,7 +65,7 @@ static int my_proc_show(struct seq_file *m, void *v){
 	Carga=Carga*100;
 	Porcen=Carga/ ((CantidadTotal));
 	Decimal=(Carga*10000)/ ((CantidadTotal))-Porcen*10000;
-	seq_printf(m,"%ld.%ld\n", Porcen,Decimal);
+	seq_printf(m,"%ld.%ld", Porcen,Decimal);
 	/*
 	seq_printf(m," CantidadTotal: %d \n", CantidadTotal);	
 	seq_printf(m," Procesos Ejecutando/Ejecucion: %d \n", Carga);
