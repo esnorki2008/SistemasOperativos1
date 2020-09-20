@@ -14,6 +14,9 @@
 #include <linux/timekeeping.h>
 
 //sudo mount -t fuse.vmhgfs-fuse .host:/Sis1 /c
+
+
+
 static int my_proc_show(struct seq_file *m, void *v){
 	int CantidadTotal;
     struct task_struct *task;

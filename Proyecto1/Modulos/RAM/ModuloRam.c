@@ -3,7 +3,7 @@
 #include <linux/mm.h>
 #include <linux/kernel.h>
 #include <linux/init.h>
-#include <linux/quicklist.h>
+//#include <linux/quicklist.h>
 #include <linux/syscalls.h>
 #include <linux/fs.h>
 #include <linux/proc_fs.h>
