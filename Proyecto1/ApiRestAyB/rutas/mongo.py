@@ -5,12 +5,11 @@ class Mongo(Resource):
     client = None
     def __init__(self):
         try:
-            self.client = MongoClient('192.168.1.10',27017)
+            self.client = MongoClient('localhost',27017)
             self.mydb = self.client['mongo_mensajes']
         except:
             print("No Se Pudo Inicializar La Base De Datos")
-            return "No Se Pudo Conectar A La Base De Datos",409
-
+            
 
     #def get(self,name):
     #    return {"data:":name}
@@ -37,9 +36,12 @@ class Mongo(Resource):
             print("Error Con La Consulta")
             return "No Se Pudo Realizar Consulta",409    
 
-    def put(self):
-        print(request.args)
-        return {"data:":"Post"}
+    #def put(self):
+    #    ip =request.args.get('mensaje', None)
+    #    if ip is None:
+    #        print("Mensaje Nulo")
+    #        return "No Se Detecto El Mensaje Enviado",409
+    #    return {"data:":"Post"}
      
     def post(self):
         try:
@@ -52,9 +54,10 @@ class Mongo(Resource):
                 print("Usuario Nulo")
                 return "No Se Detecto El Usuario A Enviar",409
             print(userre,mensaje)
-            return 'Se Cargo Dato Exitosamente',200
+            #return 'Se Cargo Dato Exitosamente',200
             myrecord = {"usuario":userre,"mensaje":mensaje}
-            record_id = self.mydb.mytable.insert(myrecord)
+            #record_id = 
+            self.mydb.mytable.insert(myrecord)
             #print record_id
             #print self.mydb.collection_names()
             print("Dato Cargado")

@@ -1,0 +1,17 @@
+--------sudo mount -t fuse.vmhgfs-fuse .host:/Sis1 /c
+git clone https://github.com/esnorki2008/SistemasOperativos1
+---------
+docker images -a
+docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
+docker rmi ID
+
+docker image build -t api_uno .
+docker run -it -v /proc:/proc -p 5000:5000  --name Uno  -d api_uno
+
+docker run -it  -p 5050:5050  --name Uno  -d api_uno
+
+
+docker ps -a
+docker container ls
+docker container logs [container id]
+sudo docker exec -it Uno bash

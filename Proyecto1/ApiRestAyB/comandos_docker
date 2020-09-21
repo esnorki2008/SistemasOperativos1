@@ -1,3 +1,5 @@
+git clone https://github.com/esnorki2008/SistemasOperativos1
+---------
 docker images -a
 docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
 docker rmi ID
@@ -11,7 +13,7 @@ docker run -it  -p 5000:5000  --name AyB  -d api_ab
 docker ps -a
 docker container ls
 docker container logs [container id]
-
+sudo docker exec -it AyB bash
 ----------------------------MONGO--------------
 sudo mkdir -p /mongodata
 sudo docker run -it -v mongodata:/data/db --name mongodb -d mongo
@@ -19,3 +21,10 @@ sudo docker run -it -p 27017:27017 --name mongodb -d mongo
 sudo docker exec -it mongodb bash
 ---ENTRAR A MONGO
 mongo
+----------
+docker-compose up
+docker-compose start
+
+
+docker-compose pull
+docker-compose restart

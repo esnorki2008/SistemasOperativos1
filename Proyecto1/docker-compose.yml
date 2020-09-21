@@ -1,0 +1,24 @@
+version: '2'
+services:
+  AyB:
+    image: api_ab
+    ports:
+     - "5000:5000"
+    network_mode: host
+    depends_on:
+     - docker_mongo
+    volumes:
+     - /proc:/proc
+    expose:
+      - "27017"
+  docker_mongo:
+    image: mongo
+    build: .
+    ports: 
+      - "27017:27017"
+    expose:
+      - "27017"
+    network_mode: host
+    
+    
+  

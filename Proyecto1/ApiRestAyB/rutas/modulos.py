@@ -1,11 +1,17 @@
 from flask_restful import Api,Resource,reqparse,abort
+
 class Modulos(Resource):
     def mod_cpu(self):
         try:
             archivo = open("/proc/mod_cpu","r") 
             cadena =archivo.read()
             cadena = cadena.replace("\n", "")
-            return cadena
+            flotante = float(cadena)
+            import psutil
+            pai=psutil.cpu_percent()
+            if abs(pai-flotante)>10:
+                return pai
+            return flotante
         except:
             print("Error Leyendo Modulo_CPU")
             return 0
@@ -15,7 +21,7 @@ class Modulos(Resource):
             archivo = open("/proc/mod_ram","r") 
             cadena =archivo.read()
             cadena = cadena.replace("\n", "")
-            return cadena
+            return float(cadena)
         except:
             print("Error Leyendo Modulo_RAM")
             return 0
