@@ -7,10 +7,6 @@ class Modulos(Resource):
             cadena =archivo.read()
             cadena = cadena.replace("\n", "")
             flotante = float(cadena)
-            import psutil
-            pai=psutil.cpu_percent()
-            if abs(pai-flotante)>4:
-                return pai
             return flotante
         except:
             print("Error Leyendo Modulo_CPU")

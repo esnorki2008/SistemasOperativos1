@@ -12,15 +12,15 @@ class Tarjeta extends Component {
             error: 0
         }
     }
- 
+
     render() {
         return (
             <div>
                 {this.cargaCombo()}
                 {this.GenerarCartas(this.state.lista)}
-                {this.state.error===0 ? null : 
-                    this.state.error===1 ? <Alerta NombreServidor=" A"/> :
-                    <Alerta NombreServidor=" B" />}
+                {this.state.error === 0 ? null :
+                    this.state.error === 1 ? <Alerta NombreServidor=" A" /> :
+                        <Alerta NombreServidor=" B" />}
             </div>
 
 
@@ -33,8 +33,8 @@ class Tarjeta extends Component {
             ip_ = this.state.ipA
         else if (event.target.value === 'Servidor B')
             ip_ = this.state.ipB
-        
-            this.setState({error:0})
+
+        this.setState({ error: 0 })
 
 
         if (ip_ !== undefined) {
@@ -42,7 +42,7 @@ class Tarjeta extends Component {
                 .then((response) => {
                     let actual = response.data[1];
                     let pos = 1;
-                    let SubLista = []
+                    let SubLista = []                                        
                     while (response.data[pos] !== undefined) {
                         actual = response.data[pos];
                         
@@ -55,13 +55,13 @@ class Tarjeta extends Component {
                 })
                 .catch((error) => {
                     console.log(error)
-                    if(ip_===this.state.ipA){
-                        this.setState({error:1})
-                        this.setState({lista:[]})
+                    if (ip_ === this.state.ipA) {
+                        this.setState({ error: 1 })
+                        this.setState({ lista: [] })
                     }
-                    else{
-                        this.setState({error:2})
-                        this.setState({lista:[]})
+                    else {
+                        this.setState({ error: 2 })
+                        this.setState({ lista: [] })
                     }
                 });
         }
