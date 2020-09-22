@@ -9,7 +9,7 @@ class Modulos(Resource):
             flotante = float(cadena)
             import psutil
             pai=psutil.cpu_percent()
-            if abs(pai-flotante)>10:
+            if abs(pai-flotante)>4:
                 return pai
             return flotante
         except:
@@ -27,4 +27,4 @@ class Modulos(Resource):
             return 0
 
     def get(self):
-        return {"cpu:":self.mod_cpu(),"ram:":self.mod_ram(),}
+        return {"cpu":self.mod_cpu(),"ram":self.mod_ram(),}
