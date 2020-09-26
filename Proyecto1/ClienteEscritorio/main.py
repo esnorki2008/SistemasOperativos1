@@ -1,4 +1,5 @@
 #'/home/pc/Downloads/bt.css'
+#'/home/pc/Music/texto.txt'
 #"192.168.1.10"
 import requests 
 import json
@@ -54,6 +55,7 @@ class Consola():
 
     def Tres(self):
         print(self.cadena)
+        print("\n")
         
     def Cuatro(self):
         try:
@@ -73,6 +75,8 @@ class Consola():
                     response = requests.post("http://"+self.ip+puerto+"/server",
                     params=jison)
                     print(response.json())
+
+            print("---------------------TERMINADO---------------------------")
             input("")
         except :
             print("Error De Conexion Con El Servidor")    

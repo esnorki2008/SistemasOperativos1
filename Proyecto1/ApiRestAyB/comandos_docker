@@ -2,7 +2,7 @@
 git clone https://github.com/esnorki2008/SistemasOperativos1
 ---------------------------------UNO--------------------
 docker image build -t uno .
-docker run -it -v /home/pc:/home/pc -p 5050:5050  --name Uno  -d uno
+docker run -it -v /home/pc:/home -p 5050:5050  --name Uno  -d uno
 mkdir –m777 pc
 ---------------------------------A y B-----------------
 docker images -a
@@ -23,9 +23,17 @@ sudo docker exec -it AyB bash
 sudo mkdir -p /mongodata
 sudo docker run -it -v mongodata:/data/db --name mongodb -d mongo
 sudo docker run -it -p 27017:27017 --name mongodb -d mongo
-sudo docker exec -it mongodb bash
+
 ---ENTRAR A MONGO
+
+--
+sudo docker exec -it proyecto1_docker_mongo_1 bash
 mongo
+show dbs
+use mongo_mensajes
+db.dropDatabase()
+exit
+exit
 ----------
 docker-compose up
 docker-compose start
