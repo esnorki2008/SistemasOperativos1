@@ -1,6 +1,9 @@
+-----------------
 git clone https://github.com/esnorki2008/SistemasOperativos1
 ---------------------------------UNO--------------------
 docker image build -t uno .
+docker run -it -v /home/pc:/home/pc -p 5050:5050  --name Uno  -d uno
+mkdir –m777 pc
 ---------------------------------A y B-----------------
 docker images -a
 docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
