@@ -1,0 +1,5 @@
+sudo su
+sudo insmod ~/SistemasOperativos1/Proyecto1/Modulos/CPU/ModuloCpu.ko
+sudo insmod ~/SistemasOperativos1/Proyecto1/Modulos/RAM/ModuloRam.ko
+cd ~/SistemasOperativos1/Proyecto1
+docker-compose start

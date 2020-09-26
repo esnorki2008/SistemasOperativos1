@@ -1,5 +1,7 @@
 git clone https://github.com/esnorki2008/SistemasOperativos1
----------
+---------------------------------UNO--------------------
+docker image build -t uno .
+---------------------------------A y B-----------------
 docker images -a
 docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
 docker rmi ID
